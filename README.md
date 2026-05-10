@@ -1,11 +1,11 @@
 # Control Hub
 
-Launcher local (Windows/Linux) pour démarrer, arrêter, configurer et synchroniser une suite d’applications Python depuis une interface web.
+Local launcher (Windows/Linux) to start, stop, configure, and synchronize a suite of local Python applications from a single web UI.
 
-## Prérequis
+## Prerequisites
 
-- Python 3.10+ recommandé
-- Accès local (aucun service cloud)
+- Python 3.10+ recommended
+- 100% local (no cloud services)
 
 ## Installation
 
@@ -27,34 +27,44 @@ source .venv/bin/activate
 python -m pip install -r backend/requirements.txt
 ```
 
-## Démarrage
+## Start
 
 ```bash
 python start.py
 ```
 
-Puis ouvrir: `http://localhost:8000`
+Then open: `http://localhost:8000`
 
-## Ajouter une application
+## Control Hub Logs
 
-- Renseigne dans l’UI:
-  - **ID** unique (ex: `drifters`)
-  - **Nom**
-  - **Script** (chemin absolu vers `start.py` / `main.py`)
-  - **Racine du projet** (dossier parent du script)
-  - **port.json** (nom du fichier, par défaut `port.json`)
-  - **theme.json** (nom du fichier, par défaut `theme.json`)
+- File: `logs/control_hub.log`
+- UI: toolbar button (filters INFO/WARNING/ERROR + clear)
 
-## Thèmes
+## Add an application
 
-Le système de thèmes a été retiré (non nécessaire).
+- Fill the form:
+  - Unique **ID** (e.g. `drifters`)
+  - **Name**
+  - **Script** (absolute path to `start.py` / `main.py`)
+  - **Project root** (parent folder of the script)
+  - **port.json** (file name, default `port.json`)
+  - **launch_type**: `web` / `background` / `console` (via “Manage applications”)
+
+## Manage applications
+
+Toolbar button → table with edit / delete actions.
+
+## Themes (Control Hub only)
+
+- Active theme is stored in `backend/config/control_hub_themes.json`
+- UI: settings button → select (dark/light/neon/matrix/solarized)
 
 ## Ports
 
-- Le port est lu/écrit dans `<project_root>/port.json` (clé `port`).
-- Si le port demandé est occupé, Control Hub choisit le prochain port libre et met à jour `port.json`.
+- The port is read/written in `<project_root>/port.json` (key `port`).
+- If the requested port is in use, Control Hub picks the next free port and updates `port.json`.
 
-## Logs
+## Application logs
 
-- Les logs (stdout/stderr) sont enregistrés dans `<project_root>/logs/<app_id>.log`
-- L’UI affiche les dernières lignes (polling toutes les 2s dans la modale)
+- Logs (stdout/stderr) are saved in `<project_root>/logs/<app_id>.log`
+- The UI shows the latest lines (polling every 2s in the modal)

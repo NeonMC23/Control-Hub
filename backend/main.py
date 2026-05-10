@@ -158,6 +158,40 @@ def api_control_hub_logs_clear():
     return jsonify({"ok": True})
 
 
+def _read_control_hub_theme() -> str:
+    data = _read_json(CONTROL_HUB_THEMES_JSON, {"active_theme": "dark"})
+    return str(data.get("active_theme") or "dark")
+
+
+def _write_control_hub_theme(theme: str):
+    _write_json(CONTROL_HUB_THEMES_JSON, {"active_theme": theme})
+
+
+@app.get("/api/control_hub/themes")
+def api_control_hub_themes_get():
+    themes_dir = FRONTEND_DIR / "styles" / "themes"
+    themes_dir.mkdir(parents=True, exist_ok=True)
+    themes = sorted([p.stem for p in themes_dir.glob("*.css") if p.is_file()])
+    active = _read_control_hub_theme()
+    if active not in themes and themes:
+        active = themes[0]
+    return jsonify({"ok": True, "themes": themes, "active_theme": active})
+
+
+@app.put("/api/control_hub/themes")
+def api_control_hub_themes_set():
+    payload = request.get_json(force=True, silent=False) or {}
+    theme = (payload.get("theme") or "").strip().lower()
+    if not theme:
+        abort(400, description="Missing 'theme'")
+    themes_dir = FRONTEND_DIR / "styles" / "themes"
+    if not (themes_dir / f"{theme}.css").exists():
+        abort(400, description="Unknown theme")
+    _write_control_hub_theme(theme)
+    app.logger.info("Control Hub theme set to %s", theme)
+    return jsonify({"ok": True})
+
+
 @app.get("/api/config/paths")
 def api_paths():
     return jsonify(
@@ -200,6 +234,8 @@ def api_apps_add():
     port_file = (payload.get("port_file") or "port.json").strip() or "port.json"
     auto_launch = bool(payload.get("auto_launch", False))
     launch_type = (payload.get("launch_type") or "web").strip().lower() or "web"
+    if launch_type not in ("web", "background", "console"):
+        abort(400, description="Invalid launch_type")
 
     if not app_id:
         abort(400, description="Missing 'id'")
@@ -250,7 +286,10 @@ def api_apps_update(app_id: str):
     if "port_file" in payload:
         current["port_file"] = (payload.get("port_file") or "port.json").strip() or "port.json"
     if "launch_type" in payload:
-        current["launch_type"] = (payload.get("launch_type") or "web").strip().lower() or "web"
+        lt = (payload.get("launch_type") or "web").strip().lower() or "web"
+        if lt not in ("web", "background", "console"):
+            abort(400, description="Invalid launch_type")
+        current["launch_type"] = lt
     if "auto_launch" in payload:
         current["auto_launch"] = bool(payload.get("auto_launch"))
 

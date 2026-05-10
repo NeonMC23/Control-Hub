@@ -6,6 +6,7 @@
     <title>Control Hub</title>
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/components.css" />
+    <link id="controlHubThemeCss" rel="stylesheet" href="/styles/themes/dark.css" />
   </head>
   <body>
     <div class="single">
@@ -15,10 +16,29 @@
           <div class="pill" id="serverStatus">Backend: …</div>
         </div>
         <div class="topbar-center">
-          <input class="input search" id="searchInput" placeholder="Rechercher une application…" />
+          <input class="input search" id="searchInput" placeholder="Search applications…" />
         </div>
         <div class="topbar-right">
-          <button class="btn btn-primary" id="btnAddApp">Ajouter</button>
+          <button class="btn btn-primary" id="btnAddApp">Add</button>
+          <button class="btn btn-icon" id="btnManageApps" title="Manage applications" aria-label="Manage applications">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 7a2 2 0 0 1 2-2h4l1 2h7a2 2 0 0 1 2 2v3h-2V9H10.382l-1-2H6v12h4v2H6a2 2 0 0 1-2-2V7zm10 6h8v8h-8v-8zm2 2v4h4v-4h-4z"
+              />
+            </svg>
+          </button>
+          <button class="btn btn-icon" id="btnSettings" title="Settings / theme" aria-label="Settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 8.8A3.2 3.2 0 1 0 12 15.2 3.2 3.2 0 0 0 12 8.8zm9 3.2-.9-.52.08-1.04a1 1 0 0 0-.5-.93l-1.9-1.1a1 1 0 0 0-1.05.06l-.86.6-.98-.42-.2-1.02a1 1 0 0 0-.98-.8H9.5a1 1 0 0 0-.98.8l-.2 1.02-.98.42-.86-.6a1 1 0 0 0-1.05-.06l-1.9 1.1a1 1 0 0 0-.5.93l.08 1.04L3 12l.9.52-.08 1.04a1 1 0 0 0 .5.93l1.9 1.1a1 1 0 0 0 1.05-.06l.86-.6.98.42.2 1.02a1 1 0 0 0 .98.8h3.2a1 1 0 0 0 .98-.8l.2-1.02.98-.42.86.6a1 1 0 0 0 1.05.06l1.9-1.1a1 1 0 0 0 .5-.93l-.08-1.04L21 12z"
+              />
+            </svg>
+          </button>
+          <button class="btn btn-icon" id="btnHubLogs" title="Control Hub logs" aria-label="Control Hub logs">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 3h9l3 3v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm8 1.5V7h2.5L14 4.5zM7 10h10v2H7v-2zm0 4h10v2H7v-2zm0 4h7v2H7v-2z" />
+            </svg>
+          </button>
         </div>
       </header>
 
@@ -30,38 +50,38 @@
     <div class="modal hidden" id="addAppModal" role="dialog" aria-modal="true">
       <div class="modal-backdrop" data-close="1"></div>
       <div class="modal-card glass">
-        <div class="modal-title">Ajouter une application</div>
+        <div class="modal-title">Add application</div>
         <div class="form">
           <label class="label">ID (unique)</label>
-          <input class="input" id="add_id" placeholder="ex: drifters" />
+          <input class="input" id="add_id" placeholder="e.g. drifters" />
 
-          <label class="label">Nom</label>
-          <input class="input" id="add_name" placeholder="ex: Drifters" />
+          <label class="label">Name</label>
+          <input class="input" id="add_name" placeholder="e.g. Drifters" />
 
-          <label class="label">Script Python (.py)</label>
+          <label class="label">Python script (.py)</label>
           <div class="row">
-            <input class="input" id="add_script_path" placeholder="Chemin absolu vers start.py / main.py" />
-            <button class="btn" id="btnBrowseScript" type="button">Parcourir</button>
+            <input class="input" id="add_script_path" placeholder="Absolute path to start.py / main.py" />
+            <button class="btn" id="btnBrowseScript" type="button">Browse</button>
           </div>
 
-          <label class="label">Racine du projet</label>
+          <label class="label">Project root</label>
           <div class="row">
-            <input class="input" id="add_project_root" placeholder="Dossier parent du script (absolu)" />
-            <button class="btn" id="btnBrowseRoot" type="button">Parcourir</button>
+            <input class="input" id="add_project_root" placeholder="Parent folder of the script (absolute)" />
+            <button class="btn" id="btnBrowseRoot" type="button">Browse</button>
           </div>
 
-          <label class="label">Fichier port (dans la racine)</label>
+          <label class="label">Port file (in project root)</label>
           <input class="input" id="add_port_file" value="port.json" />
 
           <label class="label">Auto-launch</label>
           <select class="input" id="add_autolaunch">
-            <option value="0" selected>Non</option>
-            <option value="1">Oui</option>
+            <option value="0" selected>No</option>
+            <option value="1">Yes</option>
           </select>
         </div>
         <div class="modal-actions">
-          <button class="btn" data-close="1">Annuler</button>
-          <button class="btn btn-primary" id="btnSaveApp">Sauvegarder</button>
+          <button class="btn" data-close="1">Cancel</button>
+          <button class="btn btn-primary" id="btnSaveApp">Save</button>
         </div>
         <div class="modal-error hidden" id="addAppError"></div>
       </div>
@@ -71,9 +91,107 @@
       <div class="modal-backdrop" data-close="1"></div>
       <div class="modal-card glass modal-wide">
         <div class="modal-title" id="logsTitle">Logs</div>
-        <pre class="console console-tall" id="logsConsole">Chargement…</pre>
+        <pre class="console console-tall" id="logsConsole">Loading…</pre>
         <div class="modal-actions">
-          <button class="btn" data-close="1">Fermer</button>
+          <button class="btn" data-close="1">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="hubLogsModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass modal-wide">
+        <div class="modal-title" id="hubLogsTitle">Control Hub Logs</div>
+        <div class="row">
+          <button class="btn" data-level="all">All</button>
+          <button class="btn" data-level="INFO">INFO</button>
+          <button class="btn" data-level="WARNING">WARNING</button>
+          <button class="btn" data-level="ERROR">ERROR</button>
+          <button class="btn" id="btnHubLogsClear">Clear</button>
+        </div>
+        <pre class="console console-tall" id="hubLogsConsole">Loading…</pre>
+        <div class="modal-actions">
+          <button class="btn" data-close="1">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="manageAppsModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass modal-wide">
+        <div class="modal-title">Manage applications</div>
+        <div class="row">
+          <button class="btn btn-primary" id="btnManageAppsAdd">Add</button>
+          <div style="flex: 1"></div>
+          <button class="btn" id="btnManageAppsClose" data-close="1">Close</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Script Path</th>
+                <th>Project Root</th>
+                <th>Port</th>
+                <th>Launch Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="appsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="editAppModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass">
+        <div class="modal-title">Edit application</div>
+        <div class="form">
+          <label class="label">Name</label>
+          <input class="input" id="edit_name" />
+
+          <label class="label">Script path</label>
+          <div class="row">
+            <input class="input" id="edit_script_path" />
+            <button class="btn" id="btnEditBrowseScript" type="button">Browse</button>
+          </div>
+
+          <label class="label">Project root</label>
+          <div class="row">
+            <input class="input" id="edit_project_root" />
+            <button class="btn" id="btnEditBrowseRoot" type="button">Browse</button>
+          </div>
+
+          <label class="label">Port (web only)</label>
+          <input class="input" id="edit_port" type="number" />
+
+          <label class="label">Launch type</label>
+          <select class="input" id="edit_launch_type">
+            <option value="web">Web</option>
+            <option value="background">Background</option>
+            <option value="console">Console</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" data-close="1">Cancel</button>
+          <button class="btn btn-primary" id="btnEditSave">Save</button>
+        </div>
+        <div class="modal-error hidden" id="editAppError"></div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="settingsModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass">
+        <div class="modal-title">Settings</div>
+        <label class="label">Control Hub theme</label>
+        <div class="row">
+          <select class="input" id="controlHubThemeSelect"></select>
+          <button class="btn btn-primary" id="btnApplyHubTheme">Apply</button>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" data-close="1">Close</button>
         </div>
       </div>
     </div>

@@ -1,9 +1,10 @@
 {
-  "drifters": {
-    "name": "Drifters",
-    "script_path": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Drifters\\main.py",
-    "project_root": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Drifters",
+  "chronos": {
+    "name": "Chronos",
+    "script_path": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Chronos\\start.py",
+    "project_root": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Chronos",
     "port_file": "port.json",
-    "auto_launch": false
+    "auto_launch": false,
+    "launch_type": "web"
   }
 }

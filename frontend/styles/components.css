@@ -9,6 +9,20 @@
   transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
 }
 
+.btn-icon {
+  width: 44px;
+  padding: 10px 0;
+  display: inline-grid;
+  place-items: center;
+}
+
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  opacity: 0.95;
+}
+
 .btn:hover {
   transform: translateY(-1px);
   background: rgba(255, 255, 255, 0.10);
@@ -171,4 +185,44 @@
 
 .console-tall {
   height: 460px;
+}
+
+.table-wrap {
+  margin-top: 12px;
+  border-radius: 14px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.table th,
+.table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: top;
+}
+
+.table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 650;
+  background: rgba(0, 0, 0, 0.12);
+  position: sticky;
+  top: 0;
+}
+
+.log-info {
+  color: #4caf50;
+}
+.log-warning {
+  color: #ff9800;
+}
+.log-error {
+  color: #f44336;
 }
