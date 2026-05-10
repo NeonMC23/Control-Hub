@@ -1,0 +1,9 @@
+{
+  "drifters": {
+    "name": "Drifters",
+    "script_path": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Drifters\\main.py",
+    "project_root": "\\\\Nas-lseau\\kids\\02. Pierre\\Documents\\Code\\Project\\Drifters",
+    "port_file": "port.json",
+    "auto_launch": false
+  }
+}

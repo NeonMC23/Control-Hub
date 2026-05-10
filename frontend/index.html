@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control Hub</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/components.css" />
+  </head>
+  <body>
+    <div class="single">
+      <header class="topbar glass">
+        <div class="topbar-left">
+          <div class="brand-title">Control Hub</div>
+          <div class="pill" id="serverStatus">Backend: …</div>
+        </div>
+        <div class="topbar-center">
+          <input class="input search" id="searchInput" placeholder="Rechercher une application…" />
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary" id="btnAddApp">Ajouter</button>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="grid" id="appsGrid"></div>
+      </main>
+    </div>
+
+    <div class="modal hidden" id="addAppModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass">
+        <div class="modal-title">Ajouter une application</div>
+        <div class="form">
+          <label class="label">ID (unique)</label>
+          <input class="input" id="add_id" placeholder="ex: drifters" />
+
+          <label class="label">Nom</label>
+          <input class="input" id="add_name" placeholder="ex: Drifters" />
+
+          <label class="label">Script Python (.py)</label>
+          <div class="row">
+            <input class="input" id="add_script_path" placeholder="Chemin absolu vers start.py / main.py" />
+            <button class="btn" id="btnBrowseScript" type="button">Parcourir</button>
+          </div>
+
+          <label class="label">Racine du projet</label>
+          <div class="row">
+            <input class="input" id="add_project_root" placeholder="Dossier parent du script (absolu)" />
+            <button class="btn" id="btnBrowseRoot" type="button">Parcourir</button>
+          </div>
+
+          <label class="label">Fichier port (dans la racine)</label>
+          <input class="input" id="add_port_file" value="port.json" />
+
+          <label class="label">Auto-launch</label>
+          <select class="input" id="add_autolaunch">
+            <option value="0" selected>Non</option>
+            <option value="1">Oui</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" data-close="1">Annuler</button>
+          <button class="btn btn-primary" id="btnSaveApp">Sauvegarder</button>
+        </div>
+        <div class="modal-error hidden" id="addAppError"></div>
+      </div>
+    </div>
+
+    <div class="modal hidden" id="logsModal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close="1"></div>
+      <div class="modal-card glass modal-wide">
+        <div class="modal-title" id="logsTitle">Logs</div>
+        <pre class="console console-tall" id="logsConsole">Chargement…</pre>
+        <div class="modal-actions">
+          <button class="btn" data-close="1">Fermer</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/scripts/app.js"></script>
+  </body>
+</html>

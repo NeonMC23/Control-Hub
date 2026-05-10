@@ -1,0 +1,7 @@
+2026-05-03 20:03:30 [control-hub] Launching: C:\Users\piotr\AppData\Local\Programs\Python\Python312\python.exe \\Nas-lseau\kids\02. Pierre\Documents\Code\Project\Control Hub\apps\drifters\main.py (port=5000)
+2026-05-03 20:03:30 [stdout] Drifters example app started on port=5000, theme=dark
+2026-05-03 20:03:30 [stdout] This is a dummy app. Replace this file with your real app entrypoint.
+2026-05-03 20:03:32 [stdout] Drifters: alive
+2026-05-03 20:03:34 [stdout] Drifters: alive
+2026-05-03 20:03:36 [control-hub] Stopping...
+2026-05-03 20:03:36 [control-hub] Process exited with code 1

@@ -1,0 +1,10 @@
+2026-05-03 20:02:47 [control-hub] Launching: C:\Users\piotr\AppData\Local\Programs\Python\Python312\python.exe \\Nas-lseau\kids\02. Pierre\Documents\Code\Project\Control Hub\apps\chronos\main.py (port=5001)
+2026-05-03 20:02:47 [stdout] Chronos example app started on port=5001, theme=light
+2026-05-03 20:02:49 [stdout] Chronos: alive
+2026-05-03 20:02:51 [stdout] Chronos: alive
+2026-05-03 20:02:53 [stdout] Chronos: alive
+2026-05-03 20:02:55 [stdout] Chronos: alive
+2026-05-03 20:02:57 [stdout] Chronos: alive
+2026-05-03 20:02:59 [stdout] Chronos: alive
+2026-05-03 20:03:00 [control-hub] Stopping...
+2026-05-03 20:03:00 [control-hub] Process exited with code 1
